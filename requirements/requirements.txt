@@ -1,0 +1,13 @@
+py -m pip install pyautogui
+py -m pip install keyboard
+py -m pip install pillow
+py -m pip  install -U pynput
+py -m pip  install -U pydirectinput
+py -m pip  install win32gui
+py -m pip install -U pywin32
+
+py -m pip install --upgrade pip
+py -m pip install opencv-python
+
+py -m pip install selenium
+py -m pip install webdriver-manager

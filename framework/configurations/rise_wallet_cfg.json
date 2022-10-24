@@ -1,0 +1,11 @@
+{
+    "network_name": "mainnet",
+    "network_url": "https://fullnode.mainnet.aptoslabs.com",
+
+    "password": "",
+    "password_list": [],
+
+    "target_website": "https://www.topaz.so/",
+    "target_website_mint": "https://www.topaz.so/mint/aptos-monkeys",
+    "mint_target": "aptos"
+}
