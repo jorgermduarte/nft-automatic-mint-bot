@@ -19,6 +19,7 @@ class SeleniumInstance:
 
     def initialize(self):
         driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+        driver.maximize_window()
         self.instance =  driver
         self.initialized = True
         pyautogui.sleep(3)

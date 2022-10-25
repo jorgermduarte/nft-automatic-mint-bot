@@ -56,14 +56,14 @@ class MintAptos:
     def start(Instance):
         Instance.get(wallet_settings["target_website"])
         connect_status = MintAptos.connect_wallet(Instance)
-        if(connect_status == True):
-            Instance.get(wallet_settings["target_website_mint"])
-            pyautogui.sleep(1)
 
-            # the first is the one that constantly try to mint the page
-            auto_mint = threading.Thread(target=MintAptos.try_mint, args=(Instance,))
-            # the second is the auto payment thread
-            auto_payment = threading.Thread(target=MintAptos.try_auto_payment, args=())
+        Instance.get(wallet_settings["target_website_mint"])
+        pyautogui.sleep(1)
 
-            auto_mint.start()
-            auto_payment.start()
+        # the first is the one that constantly try to mint the page
+        auto_mint = threading.Thread(target=MintAptos.try_mint, args=(Instance,))
+        # the second is the auto payment thread
+        auto_payment = threading.Thread(target=MintAptos.try_auto_payment, args=())
+
+        auto_mint.start()
+        auto_payment.start()
