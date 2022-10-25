@@ -10,6 +10,7 @@ import pyautogui
 
 options = webdriver.ChromeOptions()
 options.add_extension(os.getcwd() + "\\framework\\selenium_extensions\\rise-wallet.crx")
+options.add_argument("lang=en-GB")
 options.add_experimental_option("detach", True)
 
 class SeleniumInstance:

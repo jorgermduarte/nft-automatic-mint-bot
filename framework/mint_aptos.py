@@ -25,8 +25,9 @@ class MintAptos:
         driver.find_element(By.CSS_SELECTOR, ".flex-shrink-0 > .hover\\3A bg-yellow-200").click()
         pyautogui.sleep(3)
         driver.find_element(By.CSS_SELECTOR, ".mx-auto:nth-child(2) > .grow").click()
-        RiseWallet.auto_connect()
+        connected = RiseWallet.auto_connect()
         pyautogui.sleep(3)
+        return connected
 
     @staticmethod
     def try_mint(driver):
@@ -54,15 +55,15 @@ class MintAptos:
     @staticmethod
     def start(Instance):
         Instance.get(wallet_settings["target_website"])
-        MintAptos.connect_wallet(Instance)
+        connect_status = MintAptos.connect_wallet(Instance)
+        if(connect_status == True):
+            Instance.get(wallet_settings["target_website_mint"])
+            pyautogui.sleep(1)
 
-        Instance.get(wallet_settings["target_website_mint"])
-        pyautogui.sleep(1)
+            # the first is the one that constantly try to mint the page
+            auto_mint = threading.Thread(target=MintAptos.try_mint, args=(Instance,))
+            # the second is the auto payment thread
+            auto_payment = threading.Thread(target=MintAptos.try_auto_payment, args=())
 
-        # the first is the one that constantly try to mint the page
-        auto_mint = threading.Thread(target=MintAptos.try_mint, args=(Instance,))
-        # the second is the auto payment thread
-        auto_payment = threading.Thread(target=MintAptos.try_auto_payment, args=())
-
-        auto_mint.start()
-        auto_payment.start()
+            auto_mint.start()
+            auto_payment.start()
